@@ -86,7 +86,7 @@
 
   <span class="field-label">Nama Murid:</span>
   <select id="student">
-    <option value="">Memuatkan nama...</option>
+    <option value="">⏳ Memuatkan nama...</option>
   </select>
 
   <span class="field-label">Sebab Ketidakhadiran (pilih satu):</span>
@@ -117,6 +117,8 @@
     }
 
     async function loadData() {
+      showMessage('<div class="spinner"></div><div>⏳ Sedang memuatkan senarai nama…</div>' +
+                  '<div style="font-size:16px;color:#777;margin-top:8px">Sila tunggu sebentar</div>');
       try {
         const res = await fetch(API_URL + '?action=init');
         const out = await res.json();
@@ -142,6 +144,7 @@
         });
 
         document.getElementById('submitBtn').disabled = false;
+        hideOverlay();
       } catch (err) {
         showError('Gagal memuatkan data. Sila semak sambungan internet dan muat semula halaman.');
       }
